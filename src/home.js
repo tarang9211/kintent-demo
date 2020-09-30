@@ -22,6 +22,7 @@ function Home() {
     fetch(API_ENDPOINT)
       .then((res) => res.json())
       .then(({ data }) => {
+        // setTimeout to simulate a more loading time so the <Loading /> component shows up
         setTimeout(() => {
           setNamesList(data);
           setIsLoading(false);
