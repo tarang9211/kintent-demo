@@ -62,13 +62,15 @@ function Home() {
         css={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
-          padding: "1em",
+          justifyContent: "flex-start",
+          padding: "0em 0em 1em 0em",
+          paddingLeft: "2.5em",
+          position: "fixed",
         }}
       >
         <SearchInput
           type="text"
-          placeholder="Enter a search value"
+          placeholder="Enter name"
           onChange={(e) => setSearchText(e.target.value)}
           value={searchText}
         />
@@ -80,14 +82,15 @@ function Home() {
               rel="noopener noreferrer"
               css={{
                 display: "inline-flex",
-                border: "2px solid rgb(204, 204, 204)",
                 borderRadius: "4px",
                 padding: "0.15em 0.5em",
                 textDecoration: "none",
-                color: "#444",
+                color: "#fff",
+                background: "rgb(38, 132, 255)",
+                fontSize: "0.75em",
               }}
             >
-              Copy (& share) url{" "}
+              Open search in new tab &nbsp; &nbsp;
               <span role="img" aria-label="share url icon">
                 🔗
               </span>
@@ -97,13 +100,7 @@ function Home() {
       </div>
       {isLoading && <Loading dimensions={[100, 100]} />}
       {
-        <div
-          css={{
-            display: "grid",
-            gridTemplateColumns: "repeat(6, 0.25fr)",
-            gridGap: "0.5em",
-          }}
-        >
+        <div css={{ paddingLeft: "2.5em", paddingTop: "4em" }}>
           {!isLoading &&
             filteredData.length > 0 &&
             filteredData.map((name) => (
@@ -111,11 +108,11 @@ function Home() {
                 key={name}
                 css={{
                   fontSize: "0.75em",
-                  display: "inline-flex",
+                  display: "flex",
+                  flexDirection: "column",
                   justifyContent: "center",
-                  border: "1px solid rgb(179, 179, 179)",
                   boxSizing: "border-box",
-                  padding: "0.15em 0.5em",
+                  padding: "0.75em 0em",
                 }}
               >
                 {name}

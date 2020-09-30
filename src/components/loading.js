@@ -11,8 +11,8 @@ export function Loading({ dimensions }) {
         top: "0px",
         width: "100%",
         height: "100%",
-        backgroundColor: "grey",
-        opacity: 0.5,
+        backgroundColor: "white",
+        opacity: 0.7,
         zIndex: 1,
       }}
     >
@@ -23,7 +23,7 @@ export function Loading({ dimensions }) {
           left: "50%",
         }}
       >
-        <Spinner height={height} width={width} color="purple" />
+        <Spinner height={height} width={width} color="rgb(38, 132, 255)" />
       </div>
     </div>
   );
