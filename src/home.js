@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { jsx } from "@emotion/core";
 import { NoResults, SearchInput, Loading } from "./components";
 
@@ -36,11 +36,11 @@ function Home() {
   const query = useQueryParams();
   const text = query.get("name") !== null ? query.get("name") : "";
 
-  const performFilter = (searchText) => {
-    return namesList.filter((name) =>
-      name.toLowerCase().includes(searchText.toLowerCase())
-    );
-  };
+  const performFilterCallBack = useCallback(() => {
+    return namesList.filter((name) => {
+      return name.toLowerCase().includes(searchText.toLowerCase());
+    });
+  }, [searchText, namesList]);
 
   useEffect(() => {
     fetchNameData();
@@ -48,14 +48,9 @@ function Home() {
   }, [text]);
 
   useEffect(() => {
-    const filteredNames = performFilter(text);
+    const filteredNames = performFilterCallBack();
     setFilteredData(filteredNames);
-  }, [namesList]);
-
-  useEffect(() => {
-    const filteredNames = performFilter(searchText);
-    setFilteredData(filteredNames);
-  }, [searchText]);
+  }, [performFilterCallBack]);
 
   return (
     <div>
@@ -78,7 +73,7 @@ function Home() {
         {searchText.length > 0 && filteredData.length !== 0 && (
           <div css={{ margin: "0em 3em" }}>
             <a
-              href={`${window.location}search?name=${searchText}`}
+              href={`${window.origin}/search?name=${searchText}`}
               target="_blank"
               rel="noopener noreferrer"
               css={{
